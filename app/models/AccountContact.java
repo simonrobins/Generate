@@ -27,16 +27,6 @@ public class AccountContact implements Comparable<AccountContact>
 
 	public String password;
 
-	public static AccountContact find(final int accountContactId)
-	{
-		return Ebean.find(AccountContact.class, accountContactId);
-	}
-
-	public static AccountContact find(final String username, final String password)
-	{
-		return Ebean.find(AccountContact.class).where().eq("username", username).eq("password", password).findUnique();
-	}
-
 	public static List<AccountContact> findUsersForCompany(final int companyId)
 	{
 		return Ebean.find(AccountContact.class).where().isNotNull("username").isNotNull("password").eq("account.id", companyId).findList();

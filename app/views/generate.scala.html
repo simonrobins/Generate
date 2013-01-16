@@ -52,13 +52,13 @@
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
-			<td><input type="submit" value="Generate" /></td>
+			<td><input id="generate" type="submit" value="Generate" /></td>
 		</tr>
 		<tr><td colspan="2">&nbsp;</td></tr>
 		@if(userUrl != null) {
 		<tr>
 			<td>URL: </td>
-			<td id="url"><a href="@userUrl" target="_blank">@userUrl</a></td>
+			<td id="url"><a id="href" href="@userUrl" target="_blank">@userUrl</a></td>
 		</tr>
 		}
 	</table>
@@ -67,7 +67,7 @@
 	$(function() {
 		$('#company').chainSelect('#user', '/ajax/user', {
 			@if(userId != null) {
-			defaultValue: '@userId',
+				defaultValue: '@userId',
 			}
 			after: function(target) {
 				target.selectedIndex = 0;

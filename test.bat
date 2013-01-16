@@ -1,0 +1,1 @@
+java -cp "lib\*;" -Dhttp.port=8000 -Dsds.url=http://localhost:8080/secure/ play.core.server.NettyServer

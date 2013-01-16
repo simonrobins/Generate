@@ -26,11 +26,6 @@ public class Account
 	@OneToMany(mappedBy = "account")
 	public List<AccountContact> contacts;
 
-	public static Account find(final int companyId)
-	{
-		return Ebean.find(Account.class).where().eq("id", companyId).eq("download", "Y").findUnique();
-	}
-
 	public static List<Account> findAll()
 	{
 		String sql = "SELECT a.account_id, a.name FROM account a " + "join account_contact ac on a.account_id = ac.account_id " + "where a.download = 'Y' and ac.username is not null and ac.password is not null " + "group by a.account_id, a.name " + "order by a.name";
