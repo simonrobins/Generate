@@ -1,0 +1,15 @@
+logs/*
+nginx/logs/*
+nginx/temp/*
+project/project
+project/target
+target
+.history
+dist
+.settings
+.target
+.project
+.classpath
+*.scc
+*.onetoc2
+*.log

@@ -1,0 +1,81 @@
+@(accounts: List[Account], userUrl: String, id: Integer, userId: Integer, access: String, period: String)
+
+@main {
+
+	<h2>Generate Password</h2>
+
+	@helper.form(action=routes.Application.generate()) {
+	<table>
+		<tr>
+			<td>Company: </td>
+			<td>
+				<select name="company" id="company">
+				@for(account <- accounts) {
+					<option value="@account.id" @if(id == account.id) { selected="selected" }>@account.name</option>
+				}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>User: </td>
+			<td>
+				<select name="user" id="user"></select>
+			</td>
+		</tr>
+		<tr>
+			<td>Access: </td>
+			<td>
+				<select name="access" id="access">
+					<option value="0" @if(access == "0") { selected="selected" }>Readonly</option>
+					<option value="1" @if(access == "1") { selected="selected" }>Update only</option>
+					<option value="2" @if(access == "2") { selected="selected" }>Download only</option>
+					<option value="3" @if(access == "3") { selected="selected" }>Full access</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>Valid For: </td>
+			<td>
+				<select name="period" id="period">
+					<option value="1" @if(period == "1") { selected="selected" }>1 Day</option>
+					<option value="7" @if(period == "7") { selected="selected" }>1 Week</option>
+					<option value="30" @if(period == "30") { selected="selected" }>1 Month</option>
+					<option value="90" @if(period == "90") { selected="selected" }>3 Months</option>
+					<option value="180" @if(period == "180") { selected="selected" }>6 Months</option>
+					<option value="270" @if(period == "270") { selected="selected" }>9 Months</option>
+					<option value="365" @if(period == "365") { selected="selected" }>1 Year</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td><input type="submit" value="Generate" /></td>
+		</tr>
+		<tr><td colspan="2">&nbsp;</td></tr>
+		@if(userUrl != null) {
+		<tr>
+			<td>URL: </td>
+			<td id="url"><a href="@userUrl" target="_blank">@userUrl</a></td>
+		</tr>
+		}
+	</table>
+	}
+	<script type="text/javascript">
+	$(function() {
+		$('#company').chainSelect('#user', '/ajax/user', {
+			@if(userId != null) {
+			defaultValue: '@userId',
+			}
+			after: function(target) {
+				target.selectedIndex = 0;
+			}
+		});
+	});
+	$(function() {
+		$('#company').change();
+	});
+	</script>
+}

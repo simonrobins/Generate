@@ -1,0 +1,43 @@
+body {
+	font: 90% Verdana, sans-serif;
+	background: #fff;
+	width: 974px;
+	margin: auto;
+	background-color: #eee;
+}
+
+table {
+	font: 100% Verdana, sans-serif;
+	line-height: 2em;
+	text-align: left;
+}
+
+div#content {
+	background-color: white;
+	padding: 8px 16px;
+	border-right: solid #AAA 1px
+;	border-left: solid #AAA 1px;
+	border-bottom: solid #AAA 1px;
+}
+
+div#content h4#footer {
+	text-align: right;
+}
+
+div#header {
+	height: 72px;
+	background-image: url(/assets/images/unit4_logo_embracing_change.gif);
+	background-repeat: no-repeat;
+	background-position: top left;
+}
+
+div#content #navigation {
+	background-image: url(/assets/images/banner.jpg);
+	height: 120px;
+	background-repeat: no-repeat;
+	background-position: top left;
+}
+
+div#content h4#footer {
+	text-align: right;
+}
