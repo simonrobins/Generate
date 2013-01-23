@@ -10,5 +10,7 @@ GET	    /										controllers.Application.index
 POST	/										controllers.Application.generate
 GET	    /:companyId/:userId/:expires/:access	controllers.Application.generated(companyId, userId, expires, access)
 
+GET	    /login									controllers.Login.index
+
 # Ajax stuff
 GET		/ajax/user								controllers.Application.ajaxUser

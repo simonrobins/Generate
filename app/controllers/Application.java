@@ -12,9 +12,10 @@ import play.Play;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import security.AutoLogin;
 
-// @Security.Authenticated
+@Security.Authenticated(Secured.class)
 public class Application extends Controller
 {
 	public static Result index()
