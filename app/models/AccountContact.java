@@ -1,7 +1,5 @@
 package models;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -25,11 +23,9 @@ public class AccountContact implements Comparable<AccountContact>
 
 	public String username;
 
-	public String password;
-
-	public static List<AccountContact> findUsersForCompany(final int companyId)
+	public static AccountContact find(final int userId)
 	{
-		return Ebean.find(AccountContact.class).where().isNotNull("username").isNotNull("password").eq("account.id", companyId).findList();
+		return Ebean.find(AccountContact.class, userId);
 	}
 
 	@Override

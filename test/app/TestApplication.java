@@ -34,7 +34,7 @@ public class TestApplication extends BaseModelTest
 	@Test
 	public void testGenerated()
 	{
-		Result result = callAction(controllers.routes.ref.Application.generated("999999", "41724", "1", "0"));
+		Result result = callAction(controllers.routes.ref.Application.display("999999", "41724", "0"));
 
 		assertEquals(OK, status(result));
 		assertEquals("text/html", contentType(result));

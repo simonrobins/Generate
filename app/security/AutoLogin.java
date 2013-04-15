@@ -29,6 +29,22 @@ public class AutoLogin
 		return sb.toString();
 	}
 
+	public static String passwordMd5(final String password)
+	{
+		final StringBuffer sb = new StringBuffer();
+		final MessageDigest digest = digest();
+		digest.update(password.getBytes());
+		for(final byte hash : digest.digest())
+		{
+			final int h = hash >> 4 & 0xf;
+			final int l = hash & 0xf;
+			sb.append(HEX[h]);
+			sb.append(HEX[l]);
+		}
+
+		return sb.toString();
+	}
+
 	private static MessageDigest digest()
 	{
 		try

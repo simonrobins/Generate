@@ -26,18 +26,19 @@ public class Account
 	@OneToMany(mappedBy = "account")
 	public List<AccountContact> contacts;
 
+	public static Account find(int id)
+	{
+		return Ebean.find(Account.class, id);
+	}
+
 	public static List<Account> findAll()
 	{
 		String sql = "SELECT a.account_id, a.name FROM account a " + "join account_contact ac on a.account_id = ac.account_id " + "where a.download = 'Y' and ac.username is not null and ac.password is not null " + "group by a.account_id, a.name " + "order by a.name";
 
-		RawSql rawSql = RawSqlBuilder
-			.parse(sql)
-			.columnMapping("a.account_id", "id")
-			.columnMapping("a.name", "name")
-			.create();
+		RawSql rawSql = RawSqlBuilder.parse(sql).columnMapping("a.account_id", "id").columnMapping("a.name", "name").create();
 		Query<Account> query = Ebean.find(Account.class);
 		query.setRawSql(rawSql);
-		
+
 		return query.findList();
 	}
 }

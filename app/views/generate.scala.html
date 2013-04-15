@@ -1,4 +1,4 @@
-@(accounts: List[Account], userUrl: String, id: Integer, userId: Integer, access: String, period: String)
+@(accounts: List[Account], userUrl: String, id: Integer, contacts: List[AccountContact], userId: Integer, access: String, period: String)
 
 @main {
 
@@ -9,9 +9,11 @@
 		<tr>
 			<td>Company: </td>
 			<td>
-				<select name="company" id="company">
+				<select name="company" id="company" onchange="this.form.submit()">
 				@for(account <- accounts) {
-					<option value="@account.id" @if(id == account.id) { selected="selected" }>@account.name</option>
+					<option value="@account.id" @if(id == account.id) { selected="selected" }>
+						@account.name
+					</option>
 				}
 				</select>
 			</td>
@@ -19,17 +21,14 @@
 		<tr>
 			<td>User: </td>
 			<td>
-				<select name="user" id="user"></select>
-			</td>
-		</tr>
-		<tr>
-			<td>Access: </td>
-			<td>
-				<select name="access" id="access">
-					<option value="0" @if(access == "0") { selected="selected" }>Readonly</option>
-					<option value="1" @if(access == "1") { selected="selected" }>Update only</option>
-					<option value="2" @if(access == "2") { selected="selected" }>Download only</option>
-					<option value="3" @if(access == "3") { selected="selected" }>Full access</option>
+				<select name="user" id="user">
+				@for(contact <- contacts) {
+					@if(null != contact.username && "" != contact.username) { 
+						<option value="@contact.id" @if(userId == contact.id) { selected="selected" }>
+							@contact.username
+						</option>
+					}
+				}
 				</select>
 			</td>
 		</tr>
@@ -44,6 +43,7 @@
 					<option value="180" @if(period == "180") { selected="selected" }>6 Months</option>
 					<option value="270" @if(period == "270") { selected="selected" }>9 Months</option>
 					<option value="365" @if(period == "365") { selected="selected" }>1 Year</option>
+					<option value="3650" @if(period == "3650") { selected="selected" }>Forever</option>
 				</select>
 			</td>
 		</tr>
@@ -52,7 +52,7 @@
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
-			<td><input id="generate" type="submit" value="Generate" /></td>
+			<td><input name="generate" id="generate" type="submit" value="Generate" /></td>
 		</tr>
 		<tr><td colspan="2">&nbsp;</td></tr>
 		@if(userUrl != null) {
@@ -63,19 +63,4 @@
 		}
 	</table>
 	}
-	<script type="text/javascript">
-	$(function() {
-		$('#company').chainSelect('#user', '/ajax/user', {
-			@if(userId != null) {
-				defaultValue: '@userId',
-			}
-			after: function(target) {
-				target.selectedIndex = 0;
-			}
-		});
-	});
-	$(function() {
-		$('#company').change();
-	});
-	</script>
 }

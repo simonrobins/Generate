@@ -3,14 +3,12 @@
 # ~~~~
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file							controllers.Assets.at(path="/public", file)
+GET     /assets/*file					controllers.Assets.at(path="/public", file)
 
 # Home page
-GET	    /										controllers.Application.index
-POST	/										controllers.Application.generate
-GET	    /:companyId/:userId/:expires/:access	controllers.Application.generated(companyId, userId, expires, access)
+GET	    /							controllers.Application.index
+POST	/							controllers.Application.generate
+GET	    /:account/:user/:expires	controllers.Application.display(account, user, expires)
+GET	    /x/:account/:user/:expires	controllers.Application.changeCompany(account, user, expires)
 
-GET	    /login									controllers.Login.index
-
-# Ajax stuff
-GET		/ajax/user								controllers.Application.ajaxUser
+GET	    /login						controllers.Login.index
